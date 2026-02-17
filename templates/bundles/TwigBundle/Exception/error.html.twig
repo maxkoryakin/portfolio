@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'error.generic_title'|trans }}{% endblock %}
+
+{% block body %}
+  {% set locale = app.request.locale in ['en', 'fr'] ? app.request.locale : 'en' %}
+
+  <section class="section">
+    <div class="container-shell">
+      <div class="mx-auto max-w-2xl card text-center" data-reveal>
+        <div class="badge">{{ status_code|default(500) }}</div>
+        <h1 class="mt-5 text-4xl text-ink md:text-5xl">{{ 'error.generic_title'|trans }}</h1>
+        <p class="mx-auto mt-4 max-w-xl text-sm text-muted md:text-base">{{ 'error.generic_text'|trans }}</p>
+        <div class="mt-7 flex flex-wrap justify-center gap-3">
+          <a class="button-primary" href="{{ path('home', {'_locale': locale}) }}">{{ 'error.back_home'|trans }}</a>
+          <a class="button-outline" href="{{ path('contact', {'_locale': locale}) }}">{{ 'cta.contact'|trans }}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

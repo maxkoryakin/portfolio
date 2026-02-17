@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'admin.login_title'|trans }}{% endblock %}
+
+{% block body %}
+  <section class="section">
+    <div class="container-shell">
+      <div class="mx-auto max-w-lg card">
+        <h1 class="text-2xl font-semibold text-ink">{{ 'admin.login_title'|trans }}</h1>
+        {% if error %}
+          <div class="mt-4 rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm text-red-600">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+          </div>
+        {% endif %}
+        <form class="mt-6 space-y-4" method="post">
+          <div>
+            <label class="form-field-label" for="username">{{ 'admin.email'|trans }}</label>
+            <input class="form-field-input mt-2" type="email" id="username" name="_username" value="{{ last_username }}" required autofocus>
+          </div>
+          <div>
+            <label class="form-field-label" for="password">{{ 'admin.password'|trans }}</label>
+            <input class="form-field-input mt-2" type="password" id="password" name="_password" required>
+          </div>
+          <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+          <button class="button-primary w-full" type="submit">{{ 'admin.sign_in'|trans }}</button>
+        </form>
+      </div>
+    </div>
+  </section>
+{% endblock %}

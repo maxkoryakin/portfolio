@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <section class="section">
+    <div class="container-shell">
+      <div class="section-subtitle">{{ 'nav.resume'|trans }}</div>
+      <h1 class="section-title">{{ 'section.resume'|trans }}</h1>
+
+      <div class="mt-8 card" data-reveal>
+        {% if resume %}
+          {% set resumeTitle = localized(resume, 'title', app.request.locale) %}
+          {% set resumeFile = localized(resume, 'filePath', app.request.locale) %}
+          {% if resumeTitle %}
+            <h2 class="text-xl font-semibold text-ink">{{ resumeTitle }}</h2>
+          {% endif %}
+          {% if resumeFile %}
+            <a class="mt-4 inline-flex button-primary" href="{{ asset('uploads/resume/' ~ resumeFile) }}" target="_blank" rel="noopener">
+              {{ 'cta.download_resume'|trans }}
+            </a>
+          {% else %}
+            <p class="text-sm text-muted">{{ 'resume.file_missing'|trans }}</p>
+          {% endif %}
+        {% else %}
+          <p class="text-sm text-muted">{{ 'resume.file_missing'|trans }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

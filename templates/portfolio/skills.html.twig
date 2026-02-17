@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <section class="section">
+    <div class="container-shell">
+      <div class="section-subtitle">{{ 'nav.skills'|trans }}</div>
+      <h1 class="section-title">{{ 'section.skills'|trans }}</h1>
+
+      {% set grouped = {} %}
+      {% for skill in skills %}
+        {% set categoryLabel = localized(skill, 'category', app.request.locale) ?? 'ui.uncategorized'|trans %}
+        {% if grouped[categoryLabel] is not defined %}
+          {% set grouped = grouped|merge({ (categoryLabel): [skill] }) %}
+        {% else %}
+          {% set grouped = grouped|merge({ (categoryLabel): grouped[categoryLabel]|merge([skill]) }) %}
+        {% endif %}
+      {% endfor %}
+
+      <div class="mt-8 grid gap-6">
+        {% for category, items in grouped %}
+          <div class="card" data-reveal>
+            <div class="text-xs uppercase tracking-[0.3em] text-slate-400">{{ category }}</div>
+            <div class="mt-4 flex flex-wrap gap-2">
+              {% for skill in items %}
+                <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-sm font-semibold text-slate-600">
+                  {{ localized(skill, 'name', app.request.locale) }}
+                </span>
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          <div class="card" data-reveal>{{ 'ui.empty_skills'|trans }}</div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <section class="section">
+    <div class="container-shell">
+      <div class="section-subtitle">{{ 'nav.projects'|trans }}</div>
+      <h1 class="section-title">{{ 'section.projects'|trans }}</h1>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {% for project in projects %}
+          <div class="card flex flex-col gap-4" data-reveal>
+            {% if project.imagePath %}
+              <img class="h-44 w-full rounded-xl object-cover" src="{{ asset('uploads/projects/' ~ project.imagePath) }}" alt="{{ localized(project, 'title', app.request.locale) }}">
+            {% endif %}
+            <div>
+              <h3 class="text-xl font-semibold text-ink">{{ localized(project, 'title', app.request.locale) }}</h3>
+              <p class="mt-2 text-sm text-muted">{{ localized(project, 'shortDescription', app.request.locale) }}</p>
+            </div>
+            {% if project.projectUrl %}
+              <a class="text-sm font-semibold text-accent" href="{{ project.projectUrl }}" target="_blank" rel="noopener">{{ 'ui.visit_project'|trans }}</a>
+            {% endif %}
+          </div>
+        {% else %}
+          <div class="card">{{ 'ui.empty_projects'|trans }}</div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <section class="section">
+    <div class="container-shell">
+      <div class="section-subtitle">{{ 'nav.testimonials'|trans }}</div>
+      <h1 class="section-title">{{ 'section.testimonials'|trans }}</h1>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {% for testimonial in testimonials %}
+          <div class="card" data-reveal>
+            <div class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">{{ 'ui.recommendation'|trans }}</div>
+            <p class="text-sm text-muted">"{{ localized(testimonial, 'content', app.request.locale) }}"</p>
+            <div class="mt-4 text-sm font-semibold text-ink">{{ testimonial.authorName }}</div>
+            {% if localized(testimonial, 'authorRole', app.request.locale) %}
+              <div class="text-xs uppercase tracking-[0.2em] text-slate-400">{{ localized(testimonial, 'authorRole', app.request.locale) }}</div>
+            {% endif %}
+          </div>
+        {% else %}
+          <div class="card">{{ 'ui.empty_testimonials'|trans }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="mt-12 grid gap-6 lg:grid-cols-[1.2fr,1fr]">
+        <div class="card" data-reveal>
+          <h2 class="text-xl font-semibold text-ink">{{ 'form.testimonial'|trans }}</h2>
+          <p class="mt-2 text-sm text-muted">{{ 'ui.testimonial_hint'|trans }}</p>
+        </div>
+        <div class="card" data-reveal>
+          {{ form_start(form, {attr: {class: 'space-y-4'}}) }}
+            {{ form_errors(form) }}
+            {{ form_row(form.authorName, {label: 'form.name'|trans}) }}
+            {{ form_row(form.authorRole, {label: 'form.role'|trans}) }}
+            {{ form_row(form.company, {label: 'form.company'|trans}) }}
+            {{ form_row(form.content, {label: 'form.message'|trans}) }}
+            {% if recaptcha_enabled %}
+              <div class="space-y-2">
+                <label class="text-sm font-semibold text-slate-700">{{ 'form.captcha'|trans }}</label>
+                <div class="recaptcha-shell">
+                  <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div>
+                </div>
+              </div>
+            {% endif %}
+            <button class="button-primary w-full" type="submit">{{ 'form.submit'|trans }}</button>
+          {{ form_end(form) }}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {% if recaptcha_enabled %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  {% endif %}
+{% endblock %}

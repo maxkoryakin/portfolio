@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+  {% set currentRoute = app.request.attributes.get('_route') %}
+  {% set routeParams = app.request.attributes.get('_route_params')|default({}) %}
+  {% set isLocalizedRoute = routeParams['_locale'] is defined %}
+  {% set navItems = [
+    {'route': 'home', 'label': 'nav.home'},
+    {'route': 'projects', 'label': 'nav.projects'},
+    {'route': 'skills', 'label': 'nav.skills'},
+    {'route': 'experience', 'label': 'nav.experience'},
+    {'route': 'education', 'label': 'nav.education'},
+    {'route': 'resume', 'label': 'nav.resume'},
+    {'route': 'hobbies', 'label': 'nav.hobbies'},
+    {'route': 'testimonials', 'label': 'nav.testimonials'},
+    {'route': 'contact', 'label': 'nav.contact'}
+  ] %}
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}{{ contactInfo ? contactInfo.displayName : 'app.name'|trans }}{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+    {% block stylesheets %}{% endblock %}
+  </head>
+  <body>
+    <div class="spotlight-layer" data-spotlight-layer>
+      <canvas class="spotlight-canvas" data-spotlight-canvas aria-hidden="true"></canvas>
+    </div>
+    <div class="pointer-events-none fixed -top-28 right-[8%] h-52 w-52 rounded-full bg-blue-300/35 blur-3xl floating-orb"></div>
+    <div class="pointer-events-none fixed bottom-6 left-[4%] h-44 w-44 rounded-full bg-orange-300/35 blur-3xl floating-orb"></div>
+
+    <div class="relative z-10 min-h-screen flex flex-col">
+      <header class="site-header sticky top-0 z-50">
+        <div class="container-shell py-4">
+          <div class="header-row">
+            <a class="brand-link" href="{{ path('home', {'_locale': app.request.locale}) }}">
+              {% if contactInfo and contactInfo.photoPath %}
+                <img class="brand-avatar" src="{{ asset('uploads/profile/' ~ contactInfo.photoPath) }}" alt="{{ contactInfo.displayName }}">
+              {% else %}
+                <div class="brand-avatar flex items-center justify-center text-xs font-bold uppercase tracking-[0.2em] text-slate-600">IT</div>
+              {% endif %}
+              <div class="brand-meta">
+                <div class="brand-kicker">IT Portfolio</div>
+                <div class="brand-name">{{ contactInfo ? contactInfo.displayName : 'app.name'|trans }}</div>
+              </div>
+            </a>
+
+            <div class="header-controls">
+              <button
+                class="theme-toggle"
+                type="button"
+                data-theme-toggle
+                data-theme-light-text="{{ 'ui.theme_light'|trans }}"
+                data-theme-dark-text="{{ 'ui.theme_dark'|trans }}"
+                aria-label="{{ 'ui.toggle_theme'|trans }}"
+                aria-pressed="false"
+              >
+                <span class="theme-dot" aria-hidden="true"></span>
+                <span class="hidden sm:inline">{{ 'ui.theme'|trans }}</span>
+                <span data-theme-label>{{ 'ui.theme_dark'|trans }}</span>
+              </button>
+
+              <div class="lang-switch">
+                <a
+                  class="lang-link {{ app.request.locale == 'en' ? 'is-active' : '' }}"
+                  href="{{ isLocalizedRoute ? path(currentRoute, routeParams|merge({'_locale': 'en'})) : path('home', {'_locale': 'en'}) }}"
+                >EN</a>
+                <a
+                  class="lang-link {{ app.request.locale == 'fr' ? 'is-active' : '' }}"
+                  href="{{ isLocalizedRoute ? path(currentRoute, routeParams|merge({'_locale': 'fr'})) : path('home', {'_locale': 'fr'}) }}"
+                >FR</a>
+              </div>
+
+              <button
+                class="button-outline nav-toggle-button lg:hidden"
+                type="button"
+                data-nav-toggle
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >{{ 'ui.menu'|trans }}</button>
+            </div>
+          </div>
+
+          <nav class="desktop-nav mt-4 hidden items-center gap-1 lg:flex">
+            {% for item in navItems %}
+              <a
+                class="menu-link {{ currentRoute == item.route ? 'is-active' : '' }}"
+                href="{{ path(item.route, {'_locale': app.request.locale}) }}"
+              >
+                <span class="text-[10px] opacity-60">{{ "%02d"|format(loop.index) }}</span>
+                <span>{{ item.label|trans }}</span>
+              </a>
+            {% endfor %}
+          </nav>
+
+          <div class="mobile-nav-panel hidden lg:hidden" data-mobile-nav>
+            <div class="grid gap-2">
+              {% for item in navItems %}
+                <a
+                  class="menu-link {{ currentRoute == item.route ? 'is-active' : '' }}"
+                  href="{{ path(item.route, {'_locale': app.request.locale}) }}"
+                >
+                  <span class="text-[10px] opacity-60">{{ "%02d"|format(loop.index) }}</span>
+                  <span>{{ item.label|trans }}</span>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="flex-1">
+        <div class="container-shell pt-6">
+          {% for message in app.flashes('success') %}
+            <div class="flash-success">{{ message }}</div>
+          {% endfor %}
+        </div>
+        {% block body %}{% endblock %}
+      </main>
+
+      <footer class="site-footer">
+        <div class="container-shell py-8 text-sm">
+          {% if contactInfo %}
+            <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <div>
+                <div class="text-xs font-bold uppercase tracking-[0.25em] text-slate-400">{{ 'section.contact'|trans }}</div>
+                <div class="mt-1 font-semibold text-ink">{{ contactInfo.displayName }}</div>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="social-chip">{{ contactInfo.email }}</span>
+                {% if localized(contactInfo, 'location', app.request.locale) %}<span class="social-chip">{{ localized(contactInfo, 'location', app.request.locale) }}</span>{% endif %}
+              </div>
+            </div>
+          {% endif %}
+          <div class="mt-4 text-xs uppercase tracking-[0.2em] text-slate-400">&copy; {{ "now"|date("Y") }} {{ contactInfo ? contactInfo.displayName : 'app.name'|trans }}</div>
+        </div>
+      </footer>
+    </div>
+
+    {{ importmap() }}
+    {% block javascripts %}{% endblock %}
+  </body>
+</html>

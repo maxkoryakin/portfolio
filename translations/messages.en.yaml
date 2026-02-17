@@ -1,0 +1,98 @@
+app:
+  name: "Portfolio"
+
+nav:
+  home: "Home"
+  projects: "Projects"
+  skills: "Skills"
+  experience: "Experience"
+  education: "Education"
+  resume: "Resume"
+  hobbies: "Hobbies"
+  testimonials: "Testimonials"
+  contact: "Contact"
+
+section:
+  highlights: "Highlights"
+  projects: "Projects"
+  skills: "Skills"
+  experience: "Work Experience"
+  education: "Education"
+  resume: "Resume"
+  hobbies: "Hobbies"
+  testimonials: "Testimonials"
+  contact: "Contact"
+
+cta:
+  view_projects: "View projects"
+  contact: "Start a conversation"
+  download_resume: "Download resume"
+
+form:
+  name: "Full name"
+  email: "Email"
+  subject: "Subject"
+  message: "Message"
+  captcha: "Security check"
+  role: "Role"
+  company: "Company / Institution"
+  testimonial: "Testimonial"
+  submit: "Submit"
+  send: "Send message"
+
+flash:
+  testimonial_submitted: "Thanks! Your testimonial is awaiting approval."
+  testimonial_captcha_failed: "Please complete the captcha challenge before submitting your testimonial."
+  contact_sent: "Your message has been sent. I'll reply soon."
+  contact_captcha_failed: "Please complete the captcha challenge before sending the form."
+
+resume:
+  file_missing: "Resume not uploaded yet."
+
+misc:
+  pending: "Pending"
+  approved: "Approved"
+  rejected: "Rejected"
+
+ui:
+  empty_projects: "No projects yet."
+  empty_skills: "No skills yet."
+  empty_experience: "No work experience yet."
+  empty_education: "No education entries yet."
+  empty_hobbies: "No hobbies yet."
+  empty_testimonials: "No testimonials yet."
+  uncategorized: "Uncategorized"
+  present: "Present"
+  testimonial_hint: "Share a short note about the collaboration. Testimonials are reviewed before publishing."
+  visit_project: "Visit project"
+  menu: "Menu"
+  profile_snapshot: "Portfolio entries"
+  case_studies: "Case studies"
+  core_skills: "Core skills"
+  career_milestones: "Career milestones"
+  career_milestones_hint: "Experience + education"
+  profile_strength: "At a glance"
+  readiness_index: "Professional profile"
+  documented_entries: "Documented entries"
+  approved_testimonials: "Approved testimonials"
+  featured_work: "Featured work"
+  case_study: "Case study"
+  client_feedback: "Client feedback"
+  recommendation: "Recommendation"
+  theme: "Theme"
+  theme_dark: "Dark"
+  theme_light: "Light"
+  toggle_theme: "Toggle color theme"
+
+admin:
+  login_title: "Sign in"
+  sign_in: "Sign in"
+  email: "Email"
+  password: "Password"
+
+error:
+  not_found_title: "Page not found"
+  not_found_text: "The page you requested does not exist or may have been moved."
+  back_home: "Back to home"
+  generic_title: "Something went wrong"
+  generic_text: "An unexpected error occurred. Please try again."

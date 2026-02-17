@@ -1,0 +1,5 @@
+{% if field.value %}
+  <a href="{{ asset('uploads/resume/' ~ field.value) }}" target="_blank" rel="noopener">{{ field.value }}</a>
+{% else %}
+  <span class="text-muted">—</span>
+{% endif %}

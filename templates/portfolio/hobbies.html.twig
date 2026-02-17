@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <section class="section">
+    <div class="container-shell">
+      <div class="section-subtitle">{{ 'nav.hobbies'|trans }}</div>
+      <h1 class="section-title">{{ 'section.hobbies'|trans }}</h1>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {% for hobby in hobbies %}
+          <div class="card" data-reveal>
+            <div class="flex items-start gap-3">
+              {% if hobby.icon %}
+                <div class="hobby-icon" aria-hidden="true">{{ hobby.icon }}</div>
+              {% endif %}
+              <div class="min-w-0">
+                <h3 class="text-xl font-semibold text-ink">{{ localized(hobby, 'name', app.request.locale) }}</h3>
+                {% if localized(hobby, 'description', app.request.locale) %}
+                  <p class="mt-2 text-sm text-muted">{{ localized(hobby, 'description', app.request.locale) }}</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% else %}
+          <div class="card" data-reveal>{{ 'ui.empty_hobbies'|trans }}</div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

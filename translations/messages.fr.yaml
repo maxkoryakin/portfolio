@@ -1,0 +1,98 @@
+app:
+  name: "Portfolio"
+
+nav:
+  home: "Accueil"
+  projects: "Projets"
+  skills: "Compétences"
+  experience: "Expérience"
+  education: "Formation"
+  resume: "CV"
+  hobbies: "Loisirs"
+  testimonials: "Témoignages"
+  contact: "Contact"
+
+section:
+  highlights: "Aperçu"
+  projects: "Projets"
+  skills: "Compétences"
+  experience: "Expérience professionnelle"
+  education: "Formation"
+  resume: "CV"
+  hobbies: "Loisirs"
+  testimonials: "Témoignages"
+  contact: "Contact"
+
+cta:
+  view_projects: "Voir les projets"
+  contact: "Entrer en contact"
+  download_resume: "Télécharger le CV"
+
+form:
+  name: "Nom complet"
+  email: "Email"
+  subject: "Sujet"
+  message: "Message"
+  captcha: "Vérification de sécurité"
+  role: "Poste"
+  company: "Entreprise / Institution"
+  testimonial: "Témoignage"
+  submit: "Envoyer"
+  send: "Envoyer le message"
+
+flash:
+  testimonial_submitted: "Merci ! Votre témoignage est en attente de validation."
+  testimonial_captcha_failed: "Veuillez compléter le captcha avant d'envoyer votre témoignage."
+  contact_sent: "Votre message a été envoyé. Je vous répondrai bientôt."
+  contact_captcha_failed: "Veuillez compléter le captcha avant d'envoyer le formulaire."
+
+resume:
+  file_missing: "CV non disponible pour le moment."
+
+misc:
+  pending: "En attente"
+  approved: "Approuvé"
+  rejected: "Refusé"
+
+ui:
+  empty_projects: "Aucun projet pour le moment."
+  empty_skills: "Aucune compétence pour le moment."
+  empty_experience: "Aucune expérience professionnelle pour le moment."
+  empty_education: "Aucune formation pour le moment."
+  empty_hobbies: "Aucun loisir pour le moment."
+  empty_testimonials: "Aucun témoignage pour le moment."
+  uncategorized: "Sans catégorie"
+  present: "Présent"
+  testimonial_hint: "Partagez un court message sur la collaboration. Les témoignages sont validés avant publication."
+  visit_project: "Voir le projet"
+  menu: "Menu"
+  profile_snapshot: "Entrées du portfolio"
+  case_studies: "Études de cas"
+  core_skills: "Compétences clés"
+  career_milestones: "Étapes de carrière"
+  career_milestones_hint: "Expérience + formation"
+  profile_strength: "En un coup d'oeil"
+  readiness_index: "Profil professionnel"
+  documented_entries: "Entrées documentées"
+  approved_testimonials: "Témoignages approuvés"
+  featured_work: "Réalisations sélectionnées"
+  case_study: "Projet"
+  client_feedback: "Retours clients"
+  recommendation: "Recommandation"
+  theme: "Thème"
+  theme_dark: "Sombre"
+  theme_light: "Clair"
+  toggle_theme: "Changer le thème de couleur"
+
+admin:
+  login_title: "Connexion"
+  sign_in: "Se connecter"
+  email: "Email"
+  password: "Mot de passe"
+
+error:
+  not_found_title: "Page introuvable"
+  not_found_text: "La page demandée n'existe pas ou a été déplacée."
+  back_home: "Retour à l'accueil"
+  generic_title: "Une erreur est survenue"
+  generic_text: "Une erreur inattendue est survenue. Veuillez réessayer."
